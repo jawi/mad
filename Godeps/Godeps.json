@@ -1,0 +1,16 @@
+{
+	"ImportPath": "github.com/jawi/mad",
+	"GoVersion": "go1.5.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/coreos/go-systemd/activation",
+			"Comment": "v3-45-g068d0d9",
+			"Rev": "068d0d95daec88760f2cb3bfcf8d1ec83cd35ef9"
+		},
+		{
+			"ImportPath": "github.com/coreos/go-systemd/journal",
+			"Comment": "v3-45-g068d0d9",
+			"Rev": "068d0d95daec88760f2cb3bfcf8d1ec83cd35ef9"
+		}
+	]
+}
