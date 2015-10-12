@@ -1,0 +1,12 @@
+[Unit]
+Description=MAD HTTP server
+Requires=network.target
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mad
+
+[Install]
+WantedBy=multi-user.target
+
