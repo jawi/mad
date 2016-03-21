@@ -3,8 +3,8 @@
 package main
 
 import (
-	"net"
 	"fmt"
+	"net"
 
 	"github.com/coreos/go-systemd/activation"
 	"github.com/coreos/go-systemd/journal"
@@ -15,7 +15,7 @@ type JournaldLogger struct {
 
 func (l *JournaldLogger) Log(msg string, args ...interface{}) {
 	if journal.Enabled() {
-	    journal.Print(journal.PriInfo, fmt.Sprintf(msg, args...))
+		journal.Print(journal.PriInfo, fmt.Sprintf(msg, args...))
 	}
 }
 
@@ -30,7 +30,7 @@ func Listener() net.Listener {
 	}
 
 	if len(listeners) != 1 {
-		panic("Unexpected number of socket activation fds")
+		panic(fmt.Sprintf("Unexpected number of socket activation fds, got: %d listeners, expected 1!", len(listeners)))
 	}
 
 	return listeners[0]
