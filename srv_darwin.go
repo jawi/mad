@@ -1,20 +1,10 @@
 // mad - mock ad server
-//   (C) copyright 2015 - J.W. Janssen
+//   (C) copyright 2016 - J.W. Janssen
 package main
 
 import (
-	"fmt"
 	"net"
-	"os"
 )
-
-type StdErrLogger struct {
-}
-
-func (l *StdErrLogger) Log(msg string, args ...interface{}) {
-	fmt.Fprintf(os.Stderr, fmt.Sprintf(msg, args))
-	fmt.Fprintf(os.Stderr, "\n")
-}
 
 func NewLogger() Logger {
 	return &StdErrLogger{}

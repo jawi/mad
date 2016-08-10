@@ -1,5 +1,5 @@
 // mad - mock ad server
-//   (C) copyright 2015 - J.W. Janssen
+//   (C) copyright 2016 - J.W. Janssen
 package main
 
 import (
@@ -14,13 +14,14 @@ type JournaldLogger struct {
 }
 
 func (l *JournaldLogger) Log(msg string, args ...interface{}) {
-	if journal.Enabled() {
-		journal.Print(journal.PriInfo, fmt.Sprintf(msg, args...))
-	}
+	journal.Print(journal.PriInfo, msg, args...)
 }
 
 func NewLogger() Logger {
-	return &JournaldLogger{}
+	if journal.Enabled() {
+		return &JournaldLogger{}
+	}
+	return &StdErrLogger{}
 }
 
 func Listener() net.Listener {
