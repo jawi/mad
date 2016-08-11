@@ -11,11 +11,7 @@ func NewLogger() Logger {
 }
 
 func Listener() net.Listener {
-	ln, err := net.Listen("tcp", ":8080")
-	if err != nil {
-		panic(err)
-	}
-	return ln
+	return defaultListener()
 }
 
 // EOF

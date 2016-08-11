@@ -3,11 +3,21 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"mime"
+	"net"
 	"net/http"
 	"path/filepath"
 )
+
+var debug bool
+var bindAddr string
+
+func init() {
+	flag.BoolVar(&debug, "debug", false, "Enable debugging mode (do not use Socket activation on Linux).")
+	flag.StringVar(&bindAddr, "bind", ":8080", "Set address and port to bind to.")
+}
 
 type NoContentHandler struct {
 	log Logger
@@ -39,7 +49,17 @@ func (h *NoContentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	flag.Parse()
+
 	http.Serve(Listener(), &NoContentHandler{NewLogger()})
+}
+
+func defaultListener() net.Listener {
+	ln, err := net.Listen("tcp", bindAddr)
+	if err != nil {
+		panic(err)
+	}
+	return ln
 }
 
 // EOF

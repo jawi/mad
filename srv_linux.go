@@ -18,13 +18,20 @@ func (l *JournaldLogger) Log(msg string, args ...interface{}) {
 }
 
 func NewLogger() Logger {
-	if journal.Enabled() {
+	if !debug && journal.Enabled() {
 		return &JournaldLogger{}
 	}
 	return &StdErrLogger{}
 }
 
 func Listener() net.Listener {
+	if debug {
+		return defaultListener()
+	}
+	return socketActivationListener()
+}
+
+func socketActivationListener() net.Listener {
 	listeners, err := activation.Listeners(true)
 	if err != nil {
 		panic(err)
